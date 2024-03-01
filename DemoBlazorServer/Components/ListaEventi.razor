@@ -1,0 +1,55 @@
+﻿<h3>@Titolo</h3>
+
+@if(Eventi.Count == 0)
+{
+    <p>Nessun evento presente</p>
+}
+else
+{
+    <table class="table table-bordered table-striped table-hover">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nome</th>
+                <th>Data</th>
+                <th>Località</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+
+            @foreach (var evento in Eventi)
+            {
+                <tr>
+                    <td>@evento.Id</td>
+                    <td>@evento.Nome</td>
+                    <td>@evento.Data.ToShortDateString()</td>
+                    <td>@evento.Località</td>
+                    <td>
+                        <button @onclick="() => OnRimuoviEvento.InvokeAsync(evento)" class="btn btn-primary">Rimuovi</button>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+}
+
+
+@code {
+    [Parameter] 
+    public List<Evento> Eventi { get; set; } = new();
+    [Parameter] 
+    public string Titolo { get; set; } = "Lista Eventi";
+    [Parameter]
+    public EventCallback<Evento> OnRimuoviEvento { get; set; }
+
+
+
+
+
+
+
+   
+    
+}
