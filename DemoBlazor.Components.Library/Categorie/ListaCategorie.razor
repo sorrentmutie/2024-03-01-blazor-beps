@@ -1,0 +1,24 @@
+﻿@inject ICategorie servizioCategorie 
+
+<h3>Lista Categorie</h3>
+
+@foreach (var categoria in categorie)
+{
+    <p>@categoria.CategoryName</p>
+    @foreach(var prodotto in categoria.Products)
+    {
+        <p>Nome Prodotto: @prodotto.ProductName</p>
+    }
+}
+
+
+@code {
+    List<Category> categorie = new List<Category>();
+
+    protected override async Task OnInitializedAsync()
+    {
+        categorie = await servizioCategorie.EstraiCategorie();
+    }
+
+
+}

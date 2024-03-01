@@ -1,0 +1,25 @@
+﻿@page "/"
+
+@inject IDatiEventi datiEventi
+
+<h1>Hello, world from WASM!</h1>
+<Welcome />
+<ListaEventi Eventi="eventiFuturi"
+             OnRimuoviEvento="RimuoviEvento"
+             Titolo="Prossimi eventi"></ListaEventi>
+<hr />
+
+
+@code {
+    private List<Evento> eventiFuturi = new();
+
+    protected override void OnInitialized()
+    {
+        eventiFuturi = datiEventi.EstraiEventiFuturi();
+    }
+
+    private void RimuoviEvento(Evento eventoDaEliminare)
+    {
+        eventiFuturi.Remove(eventoDaEliminare);
+    }
+}

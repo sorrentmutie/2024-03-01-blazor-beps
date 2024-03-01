@@ -1,0 +1,44 @@
+﻿@using DemoBlazor.Models
+@inject IReqResData reqResData
+
+<h3>Persone</h3>
+<button class="btn btn-info" @onclick="CancellaRichiesta">Cancella la richiesta</button>
+
+
+
+@if(persone is not null)
+{
+    @foreach (var persona in persone)
+    {
+       <PersonCard person="@persona"></PersonCard>
+    }
+}
+
+@if (showSpinner is true)
+{
+    <div class="spinner-border text-primary" role="status">
+    </div>
+
+}
+
+@Message
+
+
+@code {
+    List<Person>? persone;
+    private string Message = string.Empty;
+    private bool showSpinner = false;
+
+    protected override async Task OnInitializedAsync()
+    {
+        showSpinner = true;
+        persone = await reqResData.GetPeople();
+        showSpinner = false;
+    }
+
+    private void CancellaRichiesta()
+    {
+        reqResData.CancelRequest();
+        Message = "Richiesta cancellata";
+    }
+}

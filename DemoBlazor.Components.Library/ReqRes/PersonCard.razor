@@ -1,0 +1,30 @@
+﻿@using DemoBlazor.Models
+@if(person is not null)
+{
+    <div class="card" style="width: 18rem;">
+        <img class="card-img-top" src="@person.Avatar" alt="Card image cap">
+        <div class="card-body">
+            <h5 class="card-title">@person.Email</h5>
+            <p class="card-text">@person.FirstName @person.LastName</p>
+        </div>
+    </div>
+}
+
+@code {
+    [Parameter] public Person? person { get; set; }
+
+    protected override void OnParametersSet()
+    {
+        base.OnParametersSet();
+    }
+
+    protected override Task OnParametersSetAsync()
+    {
+        return base.OnParametersSetAsync();
+    }
+
+    protected override void OnAfterRender(bool firstRender)
+    {
+        base.OnAfterRender(firstRender);
+    }
+}
