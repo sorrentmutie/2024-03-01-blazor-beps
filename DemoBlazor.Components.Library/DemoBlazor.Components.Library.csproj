@@ -6,6 +6,10 @@
     <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Content Remove="Categorie\NuovaCategoria.razor" />
+  </ItemGroup>
+
 
   <ItemGroup>
     <SupportedPlatform Include="browser" />
@@ -17,6 +21,10 @@
 
   <ItemGroup>
     <ProjectReference Include="..\DemoBlazor.Models\DemoBlazor.Models.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="NuovaCategoria.razor" />
   </ItemGroup>
 
 </Project>

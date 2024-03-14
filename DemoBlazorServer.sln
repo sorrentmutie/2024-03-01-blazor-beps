@@ -11,6 +11,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DemoBlazor.Components.Libra
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DemoBlazor.WASM", "DemoBlazor.WASM\DemoBlazor.WASM.csproj", "{C5CEF5A2-5396-4F04-9AAC-A25053B015B0}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DemoBlazor.API", "DemoBlazor.API\DemoBlazor.API.csproj", "{49ECF6C3-17F8-45D1-99B2-B6B1BA74B471}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{C5CEF5A2-5396-4F04-9AAC-A25053B015B0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C5CEF5A2-5396-4F04-9AAC-A25053B015B0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C5CEF5A2-5396-4F04-9AAC-A25053B015B0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{49ECF6C3-17F8-45D1-99B2-B6B1BA74B471}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{49ECF6C3-17F8-45D1-99B2-B6B1BA74B471}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{49ECF6C3-17F8-45D1-99B2-B6B1BA74B471}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{49ECF6C3-17F8-45D1-99B2-B6B1BA74B471}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
