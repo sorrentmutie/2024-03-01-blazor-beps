@@ -8,4 +8,5 @@ public interface ICategorie
     Task<List<Category>> EstraiCategorie();
     Task<List<CategoryDTO>?> EstraiCategorieDTOAsync();
     Task CreaCategoriaAsync(CategoryCreateDTO categoria);
+    Task AggiornaCategoriaAsync(CategoryCreateDTO categoria);
 }

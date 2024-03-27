@@ -1,0 +1,42 @@
+﻿@using DemoBlazor.Models.DTO
+@using Microsoft.AspNetCore.Components.Forms
+@typeparam TItem where TItem : class, new()
+
+
+
+<EditForm Model="item" OnValidSubmit="Submit">
+    <DataAnnotationsValidator></DataAnnotationsValidator>
+    
+    @if(ChildContent != null)
+    {
+        @ChildContent(item)
+    }
+
+    <button class="btn btn-info" style="margin-top:15px" type="submit">OK</button>
+    <button type="button" class="btn btn-info" style="margin-top:15px" @onclick="() => Cancel()">Cancella</button>
+</EditForm>
+
+@code
+{
+    [Parameter]
+    public RenderFragment<TItem>? ChildContent { get; set; }
+
+    [Parameter]
+    public EventCallback<TItem> OnSubmit { get; set; }
+
+    [Parameter]
+    public EventCallback OnCancel { get; set; }
+
+    [Parameter]
+    public TItem item { get; set; } = new();
+
+    private async Task Cancel()
+    {
+        await OnCancel.InvokeAsync();
+    }
+
+    private async Task Submit()
+    {
+        await OnSubmit.InvokeAsync(item);
+    }
+}

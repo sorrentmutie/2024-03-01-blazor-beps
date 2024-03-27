@@ -15,6 +15,11 @@ public class ServizioCategorie : ICategorie
         this.context = context;
     }
 
+    public Task AggiornaCategoriaAsync(CategoryCreateDTO categoria)
+    {
+        throw new NotImplementedException();
+    }
+
     public async Task CreaCategoriaAsync(CategoryCreateDTO categoria)
     {
         await context.Categories.AddAsync(new Category

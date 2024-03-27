@@ -73,7 +73,7 @@ public static class CategoriesHelpers
         }
         else
         {
-
+            categoryToUpdate.CategoryName = category.Name;
             categoryToUpdate.Description = category.Description;
             await database.SaveChangesAsync();
             return Results.NoContent();

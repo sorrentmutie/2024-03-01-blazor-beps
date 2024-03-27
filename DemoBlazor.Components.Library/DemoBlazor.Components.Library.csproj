@@ -24,7 +24,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Include="NuovaCategoria.razor" />
+    <None Include="DettaglioCategoria.razor" />
   </ItemGroup>
 
 </Project>

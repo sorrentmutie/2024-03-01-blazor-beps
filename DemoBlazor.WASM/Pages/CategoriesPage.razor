@@ -1,0 +1,69 @@
+﻿@page "/categories"
+@using DemoBlazor.Models.DTO
+@inject ICategorie service
+
+
+@if(currentCategory is null)
+{
+    <h3> Pagina Categorie</h3>
+    <button class="btn btn-info" @onclick="() => CreaNuovaCategoria()" style="margin-bottom:10px">Crea Nuova Categoria</button>
+
+    @if (categories is not null)
+    {
+        <ListaCategorie categories="@categories" 
+            OnEdit="Edit" />
+    }
+} else
+{
+    <Dettaglio item="currentCategory" TItem="CategoryCreateDTO"
+               OnSubmit="Submit"
+               OnCancel="Cancel">
+        <ChildContent>
+            <TextBox Label="Nome:" Id="Nome" @bind-Value="currentCategory.Name"></TextBox>
+            <TextBox Label="Descrizione:" Id="Description" @bind-Value="currentCategory.Description"></TextBox>            
+        </ChildContent>
+    </Dettaglio>
+}
+
+@code {
+    private List<CategoryDTO>? categories;
+    private CategoryCreateDTO? currentCategory;
+
+    protected override async Task OnInitializedAsync()
+    {
+        categories =  await service.EstraiCategorieDTOAsync();
+    }
+
+    private void Edit(CategoryDTO category)
+    {
+        currentCategory = new CategoryCreateDTO
+        {
+            Name = category.Name,
+            Description = category.Description,
+            Id = category.Id
+        };
+    }
+
+    private void CreaNuovaCategoria()
+    {
+        currentCategory = new CategoryCreateDTO();
+    }
+
+    private void Cancel()
+    {
+        currentCategory = null;
+    }
+
+    private async Task Submit(CategoryCreateDTO categoryCreateDTO)
+    {
+        if(categoryCreateDTO.Id == 0)
+        {
+            await service.CreaCategoriaAsync(categoryCreateDTO);
+        } else
+        {
+           await service.AggiornaCategoriaAsync(categoryCreateDTO);
+        }
+        currentCategory = null;
+        categories = await service.EstraiCategorieDTOAsync();
+    }
+}

@@ -14,6 +14,12 @@ public class ServizioCategorieWASM : ICategorie
         this.httpClient = httpClient;
     }
 
+    public async Task AggiornaCategoriaAsync(CategoryCreateDTO categoria)
+    {
+        await httpClient.PutAsJsonAsync(
+                       $"https://localhost:7251/categories/{categoria.Id}", categoria);
+    }
+
     public async Task CreaCategoriaAsync(CategoryCreateDTO categoria)
     {
         await httpClient.PostAsJsonAsync(
@@ -41,4 +47,6 @@ public class ServizioCategorieWASM : ICategorie
             throw new Exception("Servizio non raggiungibile");
         }
     }
+
+   
 }

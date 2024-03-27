@@ -1,0 +1,16 @@
+﻿@using System.Linq.Expressions
+<div class="form-group">
+    <label for="@Id">@Label</label>
+    <InputText id="@Id" class="form-control" 
+        Value ="@Value" ValueChanged="@ValueChanged" ValueExpression="@ValueExpression">
+    </InputText>
+    <ValidationMessage For="@ValueExpression"></ValidationMessage>
+</div> 
+
+@code{
+    [Parameter] public string Label { get; set; } = null!;
+    [Parameter] public string Id {get;set; } = null!;
+    [Parameter] public string Value {get;set;} = null!;
+    [Parameter] public EventCallback<string> ValueChanged {get;set;}
+    [Parameter] public Expression<Func<string>>? ValueExpression {get;set;}
+}

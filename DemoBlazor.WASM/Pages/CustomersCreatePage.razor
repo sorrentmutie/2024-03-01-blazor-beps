@@ -1,0 +1,54 @@
+﻿@page "/customers"
+@inject ICustomers service
+<h3>Crea un nuovo Customer</h3>
+<Dettaglio item="currentCustomer" TItem="CustomerDTO" OnSubmit="Submit" OnCancel="Cancel" >
+    <ChildContent>
+        <TextBox Id="id" Label="Id" @bind-Value="currentCustomer.Id"></TextBox>
+        <TextBox Id="company" Label="Company Name" @bind-Value="currentCustomer.CompanyName"></TextBox>
+        <TextBox Id="contact" Label="Contact Name" @bind-Value="currentCustomer.ContactName"></TextBox>
+    </ChildContent>
+</Dettaglio>
+
+@if(customers != null)
+{
+    @foreach (var customer in customers)
+    {
+        <h3>@customer.Id</h3>
+        <p>@customer.CompanyName</p>
+        <p>@customer.ContactName</p>
+    }
+}
+else
+{
+    <h3>Caricamento in corso...</h3>
+})
+
+
+
+@code {
+
+    private List<CustomerDTO>? customers = new();
+
+    protected override async Task OnInitializedAsync()
+    {
+        customers = await service.EstraiCustomersAsync();
+    }
+
+    private CustomerDTO currentCustomer = new()
+    {
+       Id = "-----" 
+    };
+
+    private void Cancel()
+    {
+        currentCustomer = new();
+    }
+
+    private async Task Submit(CustomerDTO customerDTO)
+    {
+        await service.CreaCustomerAsync(customerDTO);
+        currentCustomer = new();
+        customers = await service.EstraiCustomersAsync();
+    }
+
+}

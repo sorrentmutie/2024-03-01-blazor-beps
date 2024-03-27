@@ -40,5 +40,10 @@ categoriesGroup.MapDelete("/{id}", CategoriesHelpers.DeleteCategory);
 categoriesGroup.MapPut("/{id}", CategoriesHelpers.UpdateCategory);
 categoriesGroup.MapPatch("/{id}", CategoriesHelpers.PatchCategory);
 
+var customersGroup = app.MapGroup("/customers");
+customersGroup.MapPost("/", CustomersHelpers.CreateCustomer);
+customersGroup.MapGet("/", CustomersHelpers.GetCustomers);
+
+
 app.Run();
 

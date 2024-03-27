@@ -1,27 +1,35 @@
 ﻿@using DemoBlazor.Models.DTO
-@inject ICategorie servizioCategorie 
 
 <h3>Lista Categorie</h3>
 
-@if(categorie is not null)
+@if(categories is not null)
 {
-    @foreach (var categoria in categorie)
-    {
-        <p>@categoria.Name</p>
-        @foreach (var prodotto in categoria.Products)
-        {
-            <p>Nome Prodotto: @prodotto.Name</p>
-        }
-    }
+    <table class="table table-bordered table-striped table-hover">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nome</th>
+                <th>Descrizione</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var category in categories)
+            {
+                <tr>
+                    <td>@category.Id</td>
+                    <td>@category.Name</td>
+                    <td>@category.Description</td>
+                    <td>
+                        <button @onclick="async () => await OnEdit.InvokeAsync(category)" class="btn btn-danger">Modifica</button>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
 }
 
 @code {
-    List<CategoryDTO>? categorie = new List<CategoryDTO>();
-
-    protected override async Task OnInitializedAsync()
-    {
-        categorie = await servizioCategorie.EstraiCategorieDTOAsync();
-    }
-
-
+    [Parameter] public List<CategoryDTO>? categories { get; set; }
+    [Parameter] public EventCallback<CategoryDTO> OnEdit { get; set; }
 }

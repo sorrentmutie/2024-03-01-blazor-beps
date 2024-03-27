@@ -1,0 +1,44 @@
+﻿@using DemoBlazor.Models.DTO
+@using Microsoft.AspNetCore.Components.Forms
+@inject ICategorie service
+
+<h3>Dettaglio Categoria</h3>
+
+<EditForm Model="category" OnValidSubmit="Submit">
+    <DataAnnotationsValidator></DataAnnotationsValidator>
+    <div class="form-group">
+        <label for="nome">Nome:</label>
+        <InputText class="form-control" @bind-Value="category.Name"></InputText>
+        <ValidationMessage For="@( () => category.Name )"></ValidationMessage>
+    </div>
+
+    <div class="form-group">
+        <label for="nome">Descrizione:</label>
+        <InputText class="form-control" @bind-Value="category.Description"></InputText>
+        <ValidationMessage For="@( () => category.Description )"></ValidationMessage>
+    </div>
+
+    <button class="btn btn-info" style="margin-top:15px" type="submit">OK</button>
+    <button type="button" class="btn btn-info" style="margin-top:15px" @onclick="() => Cancel()">Cancella</button>
+</EditForm>
+
+@code 
+{
+    [Parameter] 
+    public EventCallback<CategoryCreateDTO> OnSubmit { get; set; }
+
+    [Parameter]
+    public EventCallback OnCancel { get; set; }
+
+    [Parameter]
+    public CategoryCreateDTO category { get; set; } = new();
+
+    private async Task Cancel(){
+        await OnCancel.InvokeAsync();
+    }
+
+    private async Task Submit()
+    {
+        await OnSubmit.InvokeAsync(category);
+    }
+}
