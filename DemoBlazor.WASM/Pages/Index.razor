@@ -1,6 +1,7 @@
 ﻿@page "/"
 
 @inject IDatiEventi datiEventi
+@inject IJSRuntime jsRuntime
 
 <h1>Hello, world from WASM!</h1>
 
@@ -10,9 +11,14 @@
              Titolo="Prossimi eventi"></ListaEventi>
 <hr />
 
+<button @onclick="eseguiJavaScript">Esegui JavaScript</button>
+@sommaNumeri
+
+
 
 @code {
     private List<Evento> eventiFuturi = new();
+    private int sommaNumeri = 0;
 
     protected override void OnInitialized()
     {
@@ -22,5 +28,10 @@
     private void RimuoviEvento(Evento eventoDaEliminare)
     {
         eventiFuturi.Remove(eventoDaEliminare);
+    }
+
+    private async Task eseguiJavaScript()
+    {
+       sommaNumeri =  await jsRuntime.InvokeAsync<int>("moltiplica", 10, 20);
     }
 }
