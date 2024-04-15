@@ -4,6 +4,7 @@
 @inject IJSRuntime jsRuntime
 
 <h1>Hello, world from WASM!</h1>
+<button @onclick= "async () => await OpenModal()">Apri Modale</button>
 
 <Welcome />
 <ListaEventi Eventi="eventiFuturi"
@@ -11,12 +12,41 @@
              Titolo="Prossimi eventi"></ListaEventi>
 <hr />
 
-<button @onclick="eseguiJavaScript">Esegui JavaScript</button>
-@sommaNumeri
-
+@* <button @onclick="eseguiJavaScript">Esegui JavaScript</button>
+@sommaNumeri *@
+ 
+<Modal Id="myModal" Title="La mia bellissima modale" OnSave="Save">
+    <ChildContent>
+        <h3>Prova contenuto</h3>
+        <p>Esempio di contenuto</p>
+    </ChildContent>
+</Modal>
 
 
 @code {
+    private ExampleJsInterop? myInterop;
+
+    protected override Task OnInitializedAsync()
+    {
+        myInterop = new ExampleJsInterop(jsRuntime);
+        return base.OnInitializedAsync();
+    }
+
+    private async Task OpenModal()
+    {
+        if(myInterop is not null)
+        {
+            await myInterop.ShowModal("myModal");
+        }
+    }
+
+
+    private void Save()
+    {
+        
+    
+    }
+
     private List<Evento> eventiFuturi = new();
     private int sommaNumeri = 0;
 
